@@ -109,7 +109,7 @@ def generate_vlookup_workbooks(files_data: Dict[str, List[List[Any]]], prompt: s
                             k = str(r[k_idx]).strip()
                             if k.endswith(".0"): k = k[:-2]
                             d[k] = r[v_idx]
-            lookup_info.append({"dict": d})
+                col["dict"] = d
         elif col.get("type") == "mock_file_list":
             f_path = col.get("file_path")
             lines = []
@@ -118,8 +118,7 @@ def generate_vlookup_workbooks(files_data: Dict[str, List[List[Any]]], prompt: s
                 if os.path.exists(full_path):
                     with open(full_path, 'r') as f:
                         lines = [l.strip() for l in f.readlines()]
-            lookup_info.append({"lines": lines})
-        else: lookup_info.append({})
+            col["lines"] = lines
 
     # 2. Cache for ACRD / Inhouse
     pool_qty_map = {}
@@ -166,7 +165,7 @@ def generate_vlookup_workbooks(files_data: Dict[str, List[List[Any]]], prompt: s
             
             for col_idx, col in enumerate(scenario["target_columns"]):
                 ctype = col["type"]
-                info = {"dict": col.get("dict", {})}
+                info = {"dict": col.get("dict", {}), "lines": col.get("lines", [])}
                 val, excel_formula = "", None
                 if ctype == "source":
                     idx = get_column_index(source_headers, col.get("column", "").upper())
