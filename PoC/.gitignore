@@ -1,7 +1,3 @@
-PoC/backend/models/__pycache__/task_models.cpython-310.pyc
-PoC/backend/services/__pycache__/column_detection.cpython-310.pyc
-PoC/backend/services/__pycache__/workbook_parser.cpython-310.pyc
-
-PoC/.gitignore
-PoC/CAAI/node_modules/
-PoC/backend/.env
+backend/**/__pycache__/
+backend/.env
+CAAI/node_modules/
